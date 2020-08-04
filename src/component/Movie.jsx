@@ -7,8 +7,7 @@ import { changeData } from "./genreService";
 import Dialogs from "./Dialog";
 import { withStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
-import { apiUrl } from "./config.json";
-const endpoint = apiUrl;
+
 const useStyles = (theme) => ({
   paper: {
     padding: theme.spacing(4),
@@ -48,8 +47,8 @@ class Movie extends Component {
     genreId: Joi.string().label("Genre"),
   };
   async componentDidMount() {
-    const { data: Movies } = await http.get(endpoint + "/movies");
-    const { data: genres } = await http.get(endpoint + "/genres");
+    const { data: Movies } = await http.get("/movies");
+    const { data: genres } = await http.get("/genres");
     this.setState({ Movies, genres });
   }
   handleChange = ({ currentTarget: input }) => {
@@ -61,7 +60,7 @@ class Movie extends Component {
   };
   doSubmit = async () => {
     try {
-      const { data } = await http.post(`${endpoint}/movies`, this.state.data);
+      const { data } = await http.post(`/movies`, this.state.data);
       const Movies = [data, ...this.state.Movies];
       this.setState({ Movies });
     } catch (error) {
@@ -86,7 +85,7 @@ class Movie extends Component {
   };
   handleDelete = async (movie) => {
     try {
-      await http.delete(`${endpoint}/movies/${movie._id}`);
+      await http.delete(`/movies/${movie._id}`);
       const Movies = this.state.Movies.filter((m) => m._id !== movie._id);
       this.setState({ Movies });
     } catch (error) {}

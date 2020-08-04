@@ -4,8 +4,6 @@ import http from "./http";
 import Joi from "joi-browser";
 import Form from "./Form";
 import { Grid } from "@material-ui/core";
-import { apiUrl } from "./config.json";
-const endpoint = apiUrl;
 const useStyles = (theme) => ({
   root: {
     width: 300,
@@ -50,9 +48,9 @@ class Moviedetails extends Component {
   };
 
   async componentDidMount() {
-    const { data: genres } = await http.get(endpoint + "/genres");
+    const { data: genres } = await http.get("/genres");
     const { data: movie } = await http.get(
-      `${endpoint}/movies/${this.props.match.params.id}`
+      `/movies/${this.props.match.params.id}`
     );
 
     this.setState({ genres, data: this.dataToModel(movie) });
@@ -81,7 +79,7 @@ class Moviedetails extends Component {
       const { data: movie } = this.state;
       const body = { ...movie };
       delete body._id;
-      const { data } = await http.put(`${endpoint}/movies/${movie._id}`, body);
+      const { data } = await http.put(`/movies/${movie._id}`, body);
       this.setState({ data });
       this.props.history.push("/");
     } catch (error) {
