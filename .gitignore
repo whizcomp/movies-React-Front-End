@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+*.md
 # production
 /build
 
