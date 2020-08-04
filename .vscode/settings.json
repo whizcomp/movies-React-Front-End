@@ -1,0 +1,7 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/bb6b8804-725b-418c-8993-d0b3deeb6a48/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/mseries"
+}
